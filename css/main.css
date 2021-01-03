@@ -1,2 +1,53 @@
+:root {
+  box-sizing: border-box;
+}
 
-/*  Put your CSS Here */
+h1 {
+  color: green;
+}
+
+#maze {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  flex-grow: 1;
+  display: flex;
+}
+
+.finish {
+  width: 50px;
+  height: 50px;
+  background-color: green;
+}
+
+.start {
+  width: 50px;
+  height: 50px;
+  background-color: blue;
+}
+
+.wall {
+  width: 50px;
+  height: 50px;
+  background-color: brown;
+}
+
+.empty {
+  width: 50px;
+  height: 50px;
+}
+
+.player {
+  width: 50px;
+  height: 50px;
+  background-image: url("https://cdn.vox-cdn.com/thumbor/axfNbylzmzZn-SJ0Sl1v6soFsXg=/1400x1050/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/22124944/grogu_baby_yoda.jpg");
+  background-color: gray;
+  background-position: center;
+  background-size: 50px 50px;
+  background-repeat: no-repeat;
+}
+
+/* left: 9px;
+top: 566px; absolute positioning */
