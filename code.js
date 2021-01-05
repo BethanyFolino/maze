@@ -66,16 +66,17 @@ let makeMaze = function (model) {
     maze.append(rowDiv);
   }
 };
-// let playerTop = 566; //absolute positioning
-// let playerLeft = 9;
+
 const movePlayer = function (evt) {
   player.element += `${evt.code}`;
 
   if (evt.code === "ArrowDown") {
     let destinationRow = (playerLocation.row += 1);
     let destinationId = destinationRow + "-" + playerLocation.col;
-    console.log(destinationId);
-    if (map[destinationRow][playerLocation.col] !== "W") {
+
+    if (map[destinationRow][playerLocation.col] === "W") {
+      destinationRow = playerLocation.row += -1;
+    } else if (map[destinationRow][playerLocation.col] !== "W") {
       document
         .getElementById(destinationId)
         .append(document.querySelector(".player"));
@@ -83,8 +84,10 @@ const movePlayer = function (evt) {
   } else if (evt.code === "ArrowUp") {
     let destinationRow = (playerLocation.row += -1);
     let destinationId = destinationRow + "-" + playerLocation.col;
-    console.log(destinationId);
-    if (map[destinationRow][playerLocation.col] !== "W") {
+
+    if (map[destinationRow][playerLocation.col] === "W") {
+      destinationRow = playerLocation.row += 1;
+    } else if (map[destinationRow][playerLocation.col] !== "W") {
       document
         .getElementById(destinationId)
         .append(document.querySelector(".player"));
@@ -92,8 +95,10 @@ const movePlayer = function (evt) {
   } else if (evt.code === "ArrowRight") {
     let destinationColumn = (playerLocation.col += 1);
     let destinationId = playerLocation.row + "-" + destinationColumn;
-    console.log(destinationId);
-    if (map[playerLocation.row][destinationColumn] !== "W") {
+
+    if (map[playerLocation.row][destinationColumn] === "W") {
+      destinationColumn = playerLocation.col += -1;
+    } else if (map[playerLocation.row][destinationColumn] !== "W") {
       document
         .getElementById(destinationId)
         .append(document.querySelector(".player"));
@@ -101,8 +106,10 @@ const movePlayer = function (evt) {
   } else if (evt.code === "ArrowLeft") {
     let destinationColumn = (playerLocation.col += -1);
     let destinationId = playerLocation.row + "-" + destinationColumn;
-    console.log(destinationId);
-    if (map[playerLocation.row][destinationColumn] !== "W") {
+
+    if (map[playerLocation.row][destinationColumn] === "W") {
+      destinationColumn = playerLocation.col += 1;
+    } else if (map[playerLocation.row][destinationColumn] !== "W") {
       document
         .getElementById(destinationId)
         .append(document.querySelector(".player"));
