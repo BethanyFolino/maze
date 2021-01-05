@@ -18,15 +18,15 @@ const map = [
   "WWWWWWWWWWWWWWWWWWWWW",
 ];
 
-// let player = {
-//   col: 0,
-//   row: 0,
-// };
+let playerLocation = {
+  col: 0,
+  row: 0,
+};
 
-// let finish = {
-//   col: 0,
-//   row: 0,
-// };
+let finish = {
+  col: 0,
+  row: 0,
+};
 
 let maze = document.getElementById("maze");
 
@@ -42,9 +42,7 @@ let makeMaze = function (model) {
     for (let mapColumn = 0; mapColumn < model[mapRow].length; mapColumn++) {
       let colStr = rowStr[mapColumn];
       let div = document.createElement("div");
-
-      // div.dataset.y = mapRow;
-      // div.dataset.x = mapColumn;
+      div.id = mapRow + "-" + mapColumn;
 
       if (colStr === "W") {
         div.className = "wall";
@@ -53,9 +51,13 @@ let makeMaze = function (model) {
         div.className = "start";
         rowDiv.append(div);
         div.append(player);
+        playerLocation.row = mapRow;
+        playerLocation.col = mapColumn;
       } else if (colStr === "F") {
         div.className = "finish";
         rowDiv.append(div);
+        finish.row = mapRow;
+        finish.col = mapColumn;
       } else {
         div.className = "empty";
         rowDiv.append(div);
@@ -70,55 +72,47 @@ const movePlayer = function (evt) {
   player.element += `${evt.code}`;
 
   if (evt.code === "ArrowDown") {
-    //I know that colStr doesn't work because colStr is inside the makeMaze function, but don't know what does work
-    if (colStr !== "W") {
-      colStr.append(player);
+    let destinationRow = (playerLocation.row += 1);
+    let destinationId = destinationRow + "-" + playerLocation.col;
+    console.log(destinationId);
+    if (map[destinationRow][playerLocation.col] !== "W") {
+      document
+        .getElementById(destinationId)
+        .append(document.querySelector(".player"));
     }
-    if (colStr === "F") {
-      document.write("You won!");
+  } else if (evt.code === "ArrowUp") {
+    let destinationRow = (playerLocation.row += -1);
+    let destinationId = destinationRow + "-" + playerLocation.col;
+    console.log(destinationId);
+    if (map[destinationRow][playerLocation.col] !== "W") {
+      document
+        .getElementById(destinationId)
+        .append(document.querySelector(".player"));
     }
-  } else if (evt.code === "Arrow Up") {
-    if (colStr !== "W") {
-      colStr.append(player);
+  } else if (evt.code === "ArrowRight") {
+    let destinationColumn = (playerLocation.col += 1);
+    let destinationId = playerLocation.row + "-" + destinationColumn;
+    console.log(destinationId);
+    if (map[playerLocation.row][destinationColumn] !== "W") {
+      document
+        .getElementById(destinationId)
+        .append(document.querySelector(".player"));
     }
-    if (colStr === "F") {
-      document.write("You won!");
-    }
-  } else if (evt.code === "Arrow Right") {
-    if (colStr !== "W") {
-      colStr.append(player);
-    }
-    if (colStr === "F") {
-      document.write("You won!");
-    }
-  } else if (evt.code === "Arrow Left") {
-    if (colStr !== "W") {
-      colStr.append(player);
-    }
-    if (colStr === "F") {
-      document.write("You won!");
+  } else if (evt.code === "ArrowLeft") {
+    let destinationColumn = (playerLocation.col += -1);
+    let destinationId = playerLocation.row + "-" + destinationColumn;
+    console.log(destinationId);
+    if (map[playerLocation.row][destinationColumn] !== "W") {
+      document
+        .getElementById(destinationId)
+        .append(document.querySelector(".player"));
     }
   }
-  // switch (evt.code) {
-  //   case "ArrowRight":
-  //     playerLeft = playerLeft + 50;
-  //     document.querySelector(".player").style.left = playerLeft + "px";
-  //     break;
-
-  //   case "ArrowLeft":
-  //     playerLeft = playerLeft - 50;
-  //     document.querySelector(".player").style.left = playerLeft + "px";
-  //     break;
-
-  //   case "ArrowDown":
-  //     playerTop = playerTop + 50;
-  //     document.querySelector(".player").style.top = playerTop + "px";
-  //     break;
-
-  //   case "ArrowUp":
-  //     playerTop = playerTop - 50;
-  //     document.querySelector(".player").style.top = playerTop + "px";
-  // }
+  if (map[playerLocation.row][playerLocation.col] === "F") {
+    let winMessage = "You won!";
+    let message = document.getElementById("message");
+    message.append(winMessage);
+  }
 };
 
 document.addEventListener("keydown", movePlayer);
