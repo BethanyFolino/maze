@@ -116,7 +116,7 @@ const movePlayer = function (evt) {
     }
   }
   if (map[playerLocation.row][playerLocation.col] === "F") {
-    let winMessage = "You won!";
+    let winMessage = "You won! Grogu found the knob!";
     let message = document.getElementById("message");
     message.append(winMessage);
   }

@@ -1,9 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Bungee&display=swap");
+
 :root {
   box-sizing: border-box;
 }
 
 h2 {
   color: green;
+  font-family: "Bungee", cursive;
 }
 
 #maze {
@@ -55,6 +58,12 @@ h2 {
   background-position: center;
   background-size: 40px 40px;
   background-repeat: no-repeat;
+}
+
+#message {
+  color: blue;
+  font-family: "Bungee", cursive;
+  font-size: 30px;
 }
 
 /* left: 9px;
